@@ -1,0 +1,33 @@
+VIDEO DEL HERO (animación scroll tipo Apple)
+=============================================
+
+Cuando tengas tu video de la botella descorchándose / sirviendo, déjalo aquí:
+
+    public/hero/eos-pour.mp4          ← el video (obligatorio)
+    public/hero/eos-pour.jpg          ← primer cuadro como póster (opcional pero recomendado)
+
+No hay que tocar código: la web lo detecta solo y reemplaza la animación de
+respaldo (la copa que se llena) por tu video, controlado por el scroll.
+
+ESPECIFICACIONES IDEALES
+------------------------
+- Formato: MP4 (códec H.264) — es el más compatible.
+- Sin audio (el video va silenciado; el sonido no se usa).
+- Duración: 6 a 12 segundos. El scroll recorre TODO el video de principio a fin.
+- Resolución: 1920×1080 (horizontal) funciona muy bien. También sirve vertical
+  1080×1920 si el sujeto va centrado (la imagen se recorta para llenar pantalla).
+- Peso: ideal menos de 8 MB para que cargue rápido.
+- IMPORTANTE para que el "scrub" se vea fluido al desplazar:
+  exporta con muchos fotogramas clave (keyframes). En la mayoría de editores se
+  logra poniendo el intervalo de keyframe en 1 (todos los cuadros como keyframe)
+  o "all intra". Si el video se ve "a saltos" al hacer scroll, es por esto.
+
+CÓMO PROBARLO
+-------------
+1. Copia tu archivo como public/hero/eos-pour.mp4
+2. Recarga la página principal.
+3. Haz scroll lentamente: el video debe avanzar con el desplazamiento.
+
+Si quieres usar otro nombre de archivo, se cambia en:
+    src/components/site/ScrollPourHero.tsx  (props videoSrc / poster)
+o donde se usa <ScrollPourHero /> en src/app/(site)/page.tsx

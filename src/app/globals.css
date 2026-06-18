@@ -1,0 +1,173 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-ink text-cream font-sans antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: theme("colors.gold.DEFAULT");
+    color: theme("colors.ink.DEFAULT");
+  }
+
+  /* Scrollbar discreta en tonos cava */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: theme("colors.wine.DEFAULT") transparent;
+  }
+  *::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  *::-webkit-scrollbar-thumb {
+    background: theme("colors.wine.dark");
+    border-radius: 999px;
+    border: 3px solid theme("colors.ink.DEFAULT");
+  }
+  *::-webkit-scrollbar-thumb:hover {
+    background: theme("colors.wine.DEFAULT");
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display;
+    font-feature-settings: "liga" 1, "dlig" 1;
+  }
+}
+
+@layer components {
+  /* Línea de oro fina, como filete de etiqueta */
+  .hairline {
+    height: 1px;
+    background: theme("backgroundImage.gold-line");
+  }
+
+  .kicker {
+    @apply font-sans uppercase text-gold/90;
+    letter-spacing: 0.28em;
+    font-size: 0.72rem;
+    font-weight: 600;
+  }
+
+  .container-eos {
+    @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+  }
+
+  /* Botón principal: oro sólido */
+  .btn-gold {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-gold px-7 py-3 text-sm font-semibold tracking-wide text-ink transition-all duration-300;
+  }
+  .btn-gold:hover {
+    @apply bg-gold-light shadow-glow;
+    transform: translateY(-1px);
+  }
+
+  /* Botón secundario: contorno crema */
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-cream/25 px-7 py-3 text-sm font-medium tracking-wide text-cream transition-all duration-300;
+  }
+  .btn-ghost:hover {
+    @apply border-gold/70 text-gold;
+  }
+
+  .card-eos {
+    @apply rounded-2xl border border-cream/10 bg-ink-700/60 shadow-card backdrop-blur-sm;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Grano de película fijo sobre todo el sitio — da textura y profundidad */
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* --- Hero con scroll-scrub --- */
+.hero-stage {
+  --p: 0;
+}
+.hero-bg {
+  /* Negro puro: los bordes del video son negro puro (0,0,0), así la botella
+     se funde con el fondo y no se ve ninguna "caja". */
+  background: #000;
+}
+.hero-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    42% 42% at 50% 46%,
+    rgba(201, 162, 75, 0.2),
+    transparent 70%
+  );
+  opacity: var(--p, 0);
+}
+.hero-glass-scene svg {
+  transform: scale(calc(1 + var(--p, 0) * 0.06));
+  transition: transform 0.1s linear;
+}
+.hero-liquid {
+  transform: translateY(calc((1 - var(--p, 0)) * 176px));
+}
+.hero-bubble {
+  animation: bubble-rise 3.4s ease-in infinite;
+}
+.hero-bubble.b2 {
+  animation-delay: 1s;
+}
+.hero-bubble.b3 {
+  animation-delay: 2s;
+}
+@keyframes bubble-rise {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(-150px);
+    opacity: 0;
+  }
+}
+.hero-cue {
+  opacity: clamp(0, calc(1 - var(--p, 0) * 4), 1);
+}
+
+/* Respetar quienes prefieren menos movimiento */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
