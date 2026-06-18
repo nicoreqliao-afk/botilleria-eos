@@ -12,7 +12,6 @@ next-env.d.ts
 /build
 
 # database (SQLite dev)
-/prisma/*.db
 /prisma/*.db-journal
 
 # user-generated product images
