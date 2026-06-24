@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useCart } from "@/components/cart/CartProvider";
 import { OpenStatus } from "./OpenStatus";
 
@@ -34,13 +35,17 @@ export function Navbar() {
       <nav className="container-eos flex h-16 items-center justify-between">
         <Link
           href="/"
-          className="font-display text-2xl font-semibold tracking-tight text-cream"
           aria-label="Botillería EOS — inicio"
+          className="flex items-center"
         >
-          EOS
-          <span className="ml-1 align-super text-[0.5rem] tracking-widest2 text-gold">
-            TALCA
-          </span>
+          <Image
+            src="/logo-eos.png"
+            alt="Botillería EOS"
+            width={46}
+            height={46}
+            priority
+            className="h-11 w-11 object-contain"
+          />
         </Link>
 
         <div className="hidden items-center gap-8 md:flex">

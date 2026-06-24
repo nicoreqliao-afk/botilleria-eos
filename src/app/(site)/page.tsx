@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ScrollPourHero } from "@/components/site/ScrollPourHero";
 import { Reveal } from "@/components/site/Reveal";
 import { CategoryGrid } from "@/components/site/CategoryGrid";
@@ -19,9 +20,20 @@ export default async function HomePage() {
     <>
       <ScrollPourHero />
 
-      {/* Manifiesto */}
-      <section className="relative overflow-hidden bg-wine-radial">
-        <div className="container-eos py-24 sm:py-32">
+      {/* Manifiesto — con la foto real del local de fondo (sutil) */}
+      <section className="relative isolate overflow-hidden bg-ink">
+        <Image
+          src="/fondo-local.jpg"
+          alt={`Botillería ${business.name} de noche en ${business.city}`}
+          fill
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+        {/* Oscurecido fuerte para que sea fondo y el texto se lea; funde arriba/abajo con el negro */}
+        <div className="absolute inset-0 bg-ink/75" />
+        <div className="absolute inset-0 bg-gradient-to-b from-ink via-transparent to-ink" />
+
+        <div className="container-eos relative py-24 sm:py-32">
           <Reveal className="mx-auto max-w-4xl text-center">
             <p className="kicker mb-6">Botillería · {business.sector}</p>
             <h2 className="text-balance font-display text-4xl leading-[1.1] text-cream sm:text-6xl">
@@ -84,7 +96,7 @@ export default async function HomePage() {
           <Reveal className="mb-10">
             <p className="kicker mb-3">Promos de la casa</p>
             <h2 className="font-display text-3xl text-cream sm:text-5xl">
-              Tres que valen la pena
+Los 3 más solicitados
             </h2>
           </Reveal>
           <Reveal delay={100}>

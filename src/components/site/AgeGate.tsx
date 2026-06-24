@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { business } from "@/lib/business";
 
 const KEY = "eos-age-ok";
@@ -39,7 +40,14 @@ export function AgeGate() {
     <div className="fixed inset-0 z-[100] grid place-items-center bg-ink/95 px-5 backdrop-blur-md">
       <div className="hero-bg absolute inset-0 opacity-60" />
       <div className="relative w-full max-w-md rounded-3xl border border-cream/12 bg-ink-800/90 p-8 text-center shadow-2xl animate-fade-up">
-        <p className="font-display text-5xl tracking-tight text-cream">EOS</p>
+        <Image
+          src="/logo-eos.png"
+          alt="Botillería EOS"
+          width={104}
+          height={104}
+          priority
+          className="mx-auto h-24 w-24 object-contain"
+        />
         <div className="mx-auto my-5 h-px w-16 bg-gold-line" />
         {denied ? (
           <>

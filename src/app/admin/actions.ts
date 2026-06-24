@@ -62,12 +62,14 @@ async function saveUpload(file: FormDataEntryValue | null): Promise<string | nul
   const name = `${randomUUID()}.${check.ext}`;
   await mkdir(UPLOADS_DIR, { recursive: true });
   await writeFile(path.join(UPLOADS_DIR, name), bytes);
-  return `/uploads/${name}`;
+  // Se sirve por una ruta de API: Next no sirve archivos agregados a /public
+  // después del build en producción.
+  return `/api/uploads/${name}`;
 }
 
 /** Borra una imagen del directorio de uploads, sin permitir salir de él. */
 async function removeUpload(imagePath: string | null) {
-  if (!imagePath || !imagePath.startsWith("/uploads/")) return;
+  if (!imagePath || !imagePath.startsWith("/api/uploads/")) return;
   // basename descarta cualquier intento de path traversal ("../").
   const name = path.basename(imagePath);
   const target = path.join(UPLOADS_DIR, name);

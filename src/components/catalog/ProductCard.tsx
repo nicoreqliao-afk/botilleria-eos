@@ -35,8 +35,8 @@ export function ProductCard({
     >
       {/* Imagen o lienzo tipográfico */}
       <div
-        className={`relative overflow-hidden ${
-          featured ? "aspect-[4/5]" : "aspect-square"
+        className={`relative overflow-hidden bg-ink ${
+          featured ? "aspect-[4/5]" : "aspect-[3/4]"
         }`}
       >
         {hasImage ? (
@@ -45,7 +45,7 @@ export function ProductCard({
             alt={product.name}
             fill
             sizes="(max-width: 768px) 50vw, 25vw"
-            className="object-cover transition-transform duration-700 group-hover:scale-105"
+            className="object-contain transition-transform duration-700 group-hover:scale-105"
           />
         ) : (
           <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-wine-deep/40 via-ink-700 to-ink">

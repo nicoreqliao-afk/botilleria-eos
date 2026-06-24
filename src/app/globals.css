@@ -114,17 +114,8 @@
      se funde con el fondo y no se ve ninguna "caja". */
   background: #000;
 }
-.hero-bg::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    42% 42% at 50% 46%,
-    rgba(201, 162, 75, 0.2),
-    transparent 70%
-  );
-  opacity: var(--p, 0);
-}
+/* (Se quitó el glow dorado radial del fondo: creaba un "cuadrado" de luz
+   alrededor de la botella al hacer scroll. El hero queda negro puro.) */
 .hero-glass-scene svg {
   transform: scale(calc(1 + var(--p, 0) * 0.06));
   transition: transform 0.1s linear;
@@ -156,6 +147,21 @@
 }
 .hero-cue {
   opacity: clamp(0, calc(1 - var(--p, 0) * 4), 1);
+}
+
+/* Logo EOS junto a la botella: aparece y reacciona al scroll (var --p). */
+.hero-logo {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 1.1s ease 0.15s;
+  will-change: opacity, transform, filter;
+}
+.hero-logo.is-ready {
+  opacity: calc(0.5 + var(--p, 0) * 0.5);
+  transform: translateY(calc(var(--p, 0) * -12px))
+    scale(calc(0.92 + var(--p, 0) * 0.12));
+  filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.55))
+    drop-shadow(0 0 calc(var(--p, 0) * 22px) rgba(201, 162, 75, 0.45));
 }
 
 /* Respetar quienes prefieren menos movimiento */

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import NextImage from "next/image";
 import Link from "next/link";
 import { business } from "@/lib/business";
 import { buildWhatsappUrl } from "@/lib/whatsapp";
@@ -143,26 +144,47 @@ export function ScrollPourHero() {
           width={FRAME_W}
           height={FRAME_H}
           aria-hidden="true"
-          className={`absolute inset-0 h-full w-full object-contain md:px-4 md:pb-12 md:pt-20 transition-opacity duration-700 ${
+          className={`absolute inset-0 h-full w-full object-contain px-6 pb-[8vh] pt-[8vh] md:px-4 md:pb-[10vh] md:pt-[10vh] transition-opacity duration-700 ${
             ready ? "opacity-100" : "opacity-0"
           }`}
         />
 
-        {/* Scrim para legibilidad (negro, combina con el fondo; centro limpio) */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-transparent to-ink" />
-        <div className="absolute inset-0 bg-[radial-gradient(58%_50%_at_50%_45%,rgba(0,0,0,0.55),transparent_72%)]" />
+        {/* Scrim para legibilidad: degradado vertical suave hacia negro puro
+            (sin halo/caja central) + viñeta de bordes. */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/65 via-transparent to-black" />
         <div className="absolute inset-0 bg-vignette" />
+
+        {/* Franja oscura suave (ancho completo, sin bordes laterales → no es
+            "caja") detrás del texto centrado, para que se lea sobre la etiqueta. */}
+        <div className="pointer-events-none absolute inset-x-0 top-1/2 z-[2] h-[58%] -translate-y-1/2 bg-gradient-to-b from-transparent via-black/65 to-transparent" />
+
+        {/* Logo EOS junto a la botella, en sintonía con la animación (var --p).
+            En celular va arriba-izq (al lado del cuello, hay espacio); en
+            pantallas grandes al medio-izquierda. */}
+        <div className="pointer-events-none absolute left-[4%] top-[12%] z-[7] sm:left-[7%] sm:top-1/2 sm:-translate-y-1/2 lg:left-[11%]">
+          <NextImage
+            src="/logo-eos.png"
+            alt={business.name}
+            width={180}
+            height={180}
+            priority
+            sizes="(max-width: 640px) 60px, (max-width: 1024px) 96px, 128px"
+            className={`hero-logo h-auto w-[60px] object-contain sm:w-24 lg:w-32 ${
+              ready ? "is-ready" : ""
+            }`}
+          />
+        </div>
 
         {/* Copys por pasos */}
         <div className="container-eos relative z-10 flex h-full flex-col items-center justify-center text-center">
-          <StepBlock active={step === 0}>
-            <p className="kicker mb-6">
+          <StepBlock active={step === 0} anchor="center">
+            <p className="kicker mb-3">
               {business.sector} · {business.city}
             </p>
-            <h1 className="font-display text-[19vw] leading-[0.82] tracking-tight text-cream sm:text-[13vw] lg:text-[9.5rem]">
+            <h1 className="font-display text-[12vw] leading-[0.85] tracking-tight text-cream sm:text-[9vw] lg:text-[5.5rem]">
               EOS
             </h1>
-            <p className="mt-4 font-display text-xl italic text-gold sm:text-2xl">
+            <p className="mt-1.5 font-display text-base italic text-gold sm:text-xl">
               Botillería
             </p>
           </StepBlock>
@@ -223,17 +245,23 @@ export function ScrollPourHero() {
 
 function StepBlock({
   active,
+  anchor = "center",
   children,
 }: {
   active: boolean;
+  anchor?: "top" | "center" | "bottom";
   children: React.ReactNode;
 }) {
+  const pos =
+    anchor === "top"
+      ? "top-[6vh] sm:top-[8vh]"
+      : anchor === "bottom"
+        ? "bottom-[9vh] sm:bottom-[10vh]"
+        : "top-1/2 -translate-y-1/2";
   return (
     <div
-      className={`absolute inset-x-0 px-5 drop-shadow-[0_2px_30px_rgba(0,0,0,0.6)] transition-all duration-[800ms] ease-out ${
-        active
-          ? "translate-y-0 opacity-100"
-          : "pointer-events-none translate-y-6 opacity-0"
+      className={`absolute inset-x-0 z-[3] px-5 [text-shadow:0_2px_10px_rgba(0,0,0,0.92),0_0_36px_rgba(0,0,0,0.85)] transition-opacity duration-[800ms] ease-out ${pos} ${
+        active ? "opacity-100" : "pointer-events-none opacity-0"
       }`}
     >
       {children}

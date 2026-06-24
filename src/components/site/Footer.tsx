@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { business, ageNotice } from "@/lib/business";
 import { OpenStatus } from "./OpenStatus";
 import { Stars } from "./Stars";
@@ -8,12 +9,13 @@ export function Footer() {
     <footer className="relative border-t border-cream/10 bg-ink-800">
       <div className="container-eos grid gap-10 py-14 md:grid-cols-[1.4fr_1fr_1fr]">
         <div>
-          <p className="font-display text-3xl font-semibold text-cream">
-            EOS
-            <span className="ml-1.5 align-super text-xs tracking-widest2 text-gold">
-              TALCA
-            </span>
-          </p>
+          <Image
+            src="/logo-eos.png"
+            alt="Botillería EOS"
+            width={80}
+            height={80}
+            className="h-20 w-20 object-contain"
+          />
           <p className="mt-3 max-w-xs text-sm leading-relaxed text-cream-muted">
             {business.tagline}. Cervezas, vinos y destilados con la mejor
             atención de {business.sector}.
@@ -53,6 +55,16 @@ export function Footer() {
                 className="hover:text-gold"
               >
                 Instagram {business.instagramHandle}
+              </a>
+            </li>
+            <li>
+              <a
+                href={`https://wa.me/${business.whatsappNumber}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-gold"
+              >
+                WhatsApp {business.whatsappDisplay}
               </a>
             </li>
           </ul>
