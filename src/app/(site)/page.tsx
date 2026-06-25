@@ -146,6 +146,55 @@ Los 3 más solicitados
         <Reveal delay={100}>
           <ReviewMarquee />
         </Reveal>
+        <Reveal
+          delay={150}
+          className="container-eos mt-14 flex flex-col items-center gap-4 text-center"
+        >
+          <p className="max-w-md text-cream-muted">
+            ¿Ya compraste en {business.name}? Tu reseña ayuda a que más gente de{" "}
+            {business.city} nos encuentre.
+          </p>
+          <a
+            href={business.reviewsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-gold inline-flex items-center gap-2"
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path d="M12 2l2.95 5.98 6.6.96-4.77 4.65 1.13 6.57L12 17.98 6.09 20.16l1.13-6.57L2.45 8.94l6.6-.96L12 2z" />
+            </svg>
+            Deja tu reseña en Google
+          </a>
+        </Reveal>
+      </section>
+
+      {/* Franja a pantalla completa: fachada del local al atardecer */}
+      <section className="relative isolate flex min-h-[46vh] items-center justify-center overflow-hidden bg-ink sm:min-h-[64vh] lg:min-h-[82vh]">
+        <Image
+          src="/fondo-frente.jpg"
+          alt={`Frente de ${business.name} al atardecer en ${business.city}`}
+          fill
+          sizes="100vw"
+          className="object-cover object-[50%_40%]"
+        />
+        {/* Solo funde los bordes con las secciones vecinas (arriba ink-800, abajo
+            ink); el centro muestra la foto a plena luz. */}
+        <div className="absolute inset-0 bg-gradient-to-b from-ink-800 via-transparent to-ink" />
+        {/* Velo suave SOLO detrás del texto (radial feather, sin bordes = sin caja) */}
+        <div className="absolute inset-0 bg-[radial-gradient(58%_42%_at_50%_52%,rgba(0,0,0,0.5),transparent_72%)]" />
+        <Reveal className="container-eos relative text-center">
+          <p className="kicker mb-4">Minimarket y Botillería · {business.city}</p>
+          <h2 className="text-balance font-display text-4xl leading-[1.1] text-cream [text-shadow:0_2px_18px_rgba(0,0,0,0.85)] sm:text-6xl">
+            Abiertos hasta tarde,{" "}
+            <span className="italic text-gold">todos los días</span>
+          </h2>
+        </Reveal>
       </section>
 
       {/* Visítanos */}

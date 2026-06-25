@@ -21,6 +21,11 @@ export const business = {
   mapsQuery: "Botillería Eos Talca",
   mapsUrl:
     "https://www.google.com/maps/search/?api=1&query=Botiller%C3%ADa+Eos+Talca",
+  // Enlace para dejar reseña. Por ahora abre la ficha en Maps. Para que abra
+  // DIRECTO en "escribir reseña", reemplazar por el link corto de Google
+  // Business Profile ("Pedir reseñas" → copia el https://g.page/r/...).
+  reviewsUrl:
+    "https://www.google.com/maps/search/?api=1&query=Botiller%C3%ADa+Eos+Talca",
 } as const;
 
 export const ageNotice =
