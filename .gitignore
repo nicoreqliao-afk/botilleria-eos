@@ -36,3 +36,7 @@ yarn-error.log*
 
 # Claude Code local settings
 .claude/
+
+# temporary scripts / references
+/scripts/tmp-*
+/tmp-ref/
