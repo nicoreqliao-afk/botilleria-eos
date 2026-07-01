@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Fraunces, Archivo } from "next/font/google";
 import "./globals.css";
 import { business } from "@/lib/business";
+import { BusinessJsonLd } from "@/components/site/JsonLd";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -19,27 +20,55 @@ const archivo = Archivo({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://botilleria-eos.cl"),
+  metadataBase: new URL(business.siteUrl),
   title: {
-    default: `${business.name} · ${business.city}`,
+    default: `${business.name} · Botillería en ${business.city} abierta hasta tarde`,
     template: `%s · ${business.name}`,
   },
-  description: `${business.name} en ${business.sector}, ${business.city}. Cervezas, vinos, whisky, pisco y más. ${business.rating}★ con ${business.reviews} reseñas. Abierto hasta tarde · pedidos por WhatsApp.`,
+  description: `${business.name}, botillería en ${business.sector}, ${business.city}. Cervezas, vinos, whisky, pisco, espumantes y más. ${business.rating}★ con ${business.reviews} reseñas. Abierto hasta tarde todos los días · pedidos por WhatsApp.`,
+  applicationName: business.name,
   keywords: [
     "botillería Talca",
+    "botillería EOS",
     "EOS Talca",
+    "botillería Villa Bicentenario",
     "delivery alcohol Talca",
     "cervezas Talca",
     "vinos Talca",
+    "licores Talca",
+    "botillería abierta hasta tarde Talca",
     "Villa Bicentenario",
   ],
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
-    title: `${business.name} · ${business.city}`,
-    description: `Cervezas, vinos, whisky y más en ${business.sector}, ${business.city}. ${business.rating}★ con ${business.reviews} reseñas.`,
+    title: `${business.name} · Botillería en ${business.city}`,
+    description: `Cervezas, vinos, whisky, pisco y más en ${business.sector}, ${business.city}. ${business.rating}★ con ${business.reviews} reseñas. Abierto hasta tarde · pedidos por WhatsApp.`,
+    url: business.siteUrl,
+    siteName: business.name,
     locale: "es_CL",
     type: "website",
+    images: [
+      {
+        url: "/fondo-frente.jpg",
+        width: 1200,
+        height: 630,
+        alt: `Fachada de ${business.name} en ${business.city}`,
+      },
+    ],
   },
-  robots: { index: true, follow: true },
+  twitter: {
+    card: "summary_large_image",
+    title: `${business.name} · Botillería en ${business.city}`,
+    description: `Cervezas, vinos, whisky y más. ${business.rating}★ con ${business.reviews} reseñas. Abierto hasta tarde · pedidos por WhatsApp.`,
+    images: ["/fondo-frente.jpg"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large" },
+  },
 };
 
 export const viewport: Viewport = {
@@ -55,7 +84,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es-CL" className={`${fraunces.variable} ${archivo.variable}`}>
-      <body className="grain min-h-dvh">{children}</body>
+      <body className="grain min-h-dvh">
+        <BusinessJsonLd />
+        {children}
+      </body>
     </html>
   );
 }

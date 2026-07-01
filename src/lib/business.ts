@@ -6,6 +6,8 @@ export const business = {
   shortName: "EOS",
   legalType: "Tienda de bebidas alcohólicas",
   tagline: "La botillería de Villa Bicentenario",
+  // Dominio público del sitio (usado en metadata, sitemap y datos estructurados).
+  siteUrl: "https://botilleriaeos.cl",
   city: "Talca",
   region: "Región del Maule",
   sector: "Villa Bicentenario",
