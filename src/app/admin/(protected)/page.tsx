@@ -60,8 +60,8 @@ export default async function AdminDashboard() {
                   Sin productos en esta categoría.
                 </p>
               ) : (
-                <div className="overflow-hidden rounded-xl border border-cream/10">
-                  <table className="w-full text-sm">
+                <div className="overflow-x-auto rounded-xl border border-cream/10">
+                  <table className="w-full min-w-[380px] text-sm">
                     <tbody className="divide-y divide-cream/8">
                       {cat.products.map((p) => (
                         <tr

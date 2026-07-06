@@ -76,6 +76,7 @@ export function Navbar() {
           <button
             onClick={() => setMenuOpen((v) => !v)}
             aria-label="Menú"
+            aria-expanded={menuOpen}
             className="text-cream md:hidden"
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">

@@ -94,6 +94,7 @@ export function ProductCard({
           <button
             onClick={handleAdd}
             disabled={!product.available}
+            title={product.available ? `Agregar ${product.name}` : "Agotado"}
             className={`rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all ${
               added
                 ? "bg-emerald-600 text-white"

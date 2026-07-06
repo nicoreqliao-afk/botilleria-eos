@@ -47,11 +47,11 @@ export type DayHours = {
 };
 
 export const weeklyHours: DayHours[] = [
-  { day: 1, label: "Lunes", short: "Lun", open: "12:00", close: "00:00" },
-  { day: 2, label: "Martes", short: "Mar", open: "12:00", close: "00:00" },
-  { day: 3, label: "Miércoles", short: "Mié", open: "12:00", close: "00:30" },
-  { day: 4, label: "Jueves", short: "Jue", open: "12:00", close: "00:30" },
-  { day: 5, label: "Viernes", short: "Vie", open: "12:00", close: "02:00" },
+  { day: 1, label: "Lunes", short: "Lun", open: "12:00", close: "01:00" },
+  { day: 2, label: "Martes", short: "Mar", open: "12:00", close: "01:00" },
+  { day: 3, label: "Miércoles", short: "Mié", open: "12:00", close: "01:00" },
+  { day: 4, label: "Jueves", short: "Jue", open: "12:00", close: "01:00" },
+  { day: 5, label: "Viernes", short: "Vie", open: "12:00", close: "03:00" },
   { day: 6, label: "Sábado", short: "Sáb", open: "12:00", close: "03:00" },
   { day: 0, label: "Domingo", short: "Dom", open: "12:00", close: "00:00" },
 ];
